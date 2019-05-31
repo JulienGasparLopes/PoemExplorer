@@ -1,0 +1,97 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  cursor: default;
+}
+body {
+  overflow: hidden;
+  background: #730c1d;
+  background: -webkit-linear-gradient(to right, #0e0415, #730c1d);
+  background: linear-gradient(to right, #0e0415, #730c1d);
+  font-family: "Noto Serif JP";
+  color: white;
+}
+.hidden {
+  opacity: 0;
+}
+#homeContainer {
+  width: 100%;
+  height: 100%;
+  transition-property: opacity;
+  transition-duration: 3s;
+  transition-delay: 8s;
+}
+#homeContainer #homeTitle {
+  font-size: 5em;
+  text-align: center;
+  margin: 15% auto 2% auto;
+  transition-property: opacity;
+  transition-duration: 4s;
+}
+#homeContainer #homeSubtitle {
+  font-size: 2.2em;
+  text-align: center;
+  margin: 0;
+  transition-property: opacity;
+  transition-duration: 4s;
+  transition-delay: 2s;
+}
+#homeContainer #homeTitleFooter {
+  font-size: 1em;
+  font-style: italic;
+  margin: 10% 0 0 0;
+  text-align: right;
+  transform: translate(-300px);
+  transition-property: opacity, transform;
+  transition-duration: 4s;
+  transition-delay: 4s;
+}
+#poemContainer {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 3s;
+  transition-delay: 10s;
+}
+#poemContainer .abs {
+  position: absolute;
+}
+#poemContainer #next {
+  opacity: 0;
+}
+#poemContainer #back {
+  color: white;
+  margin: auto;
+  width: 60px;
+  font-size: 2em;
+  display: none;
+}
+#poemContainer .hide {
+  opacity: 0;
+  transform: scale(30);
+  transition: opacity 1.6s, transform 1.6s;
+}
+#poemContainer .show {
+  opacity: 1 !important;
+  transition: opacity 1.6s;
+}
+#poemContainer .link {
+  color: #c5d644;
+  font-style: italic;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */
