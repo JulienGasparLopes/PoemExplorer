@@ -1,6 +1,8 @@
 var express = require('express'); //import de la bibliothèque Express
 var app = express(); //instanciation d'une application Express
 
+var PORT = 80;
+
 //Redirection vers l'index
 app.get('/', function(req, res) {
     res.sendFile(__dirname+"/index.html");
@@ -16,5 +18,5 @@ app.get('/*', function(req, res) {
     res.sendFile(__dirname+req.url);
 });
 
-app.listen(22233); //commence à accepter les requêtes
-console.log("App listening on port 22233...");
+app.listen(PORT); //commence à accepter les requêtes
+console.log("App listening on port " + PORT);
