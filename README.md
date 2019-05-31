@@ -9,7 +9,7 @@ click on this word to navigate to the next poem (hide the previous one and show 
 
 The website can be added directly on some host server (only HTML, CSS and client-side JS)
 To easily start it on local machine, make sure you have NodeJS installed and run command :
-'''
+```
 node server.js
-'''
+```
 You can then access to website using url "http://localhost" (you can add port ":80")
