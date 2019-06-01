@@ -51,6 +51,7 @@ function resize() {
 	poem.style.top = Math.floor(window.innerHeight/2 - poem.offsetHeight/2) + "px";
 	next.style.left = Math.floor(window.innerWidth/2 - next.offsetWidth/2) + "px";
 	next.style.top = Math.floor(window.innerHeight/2 - next.offsetHeight/2) + "px";
+	back.style.left = Math.floor(window.innerWidth/2 - back.offsetWidth/2) + "px";
 	back.style.transform = "translateY(" + window.innerHeight*3/4 + "px)";
 }
 
