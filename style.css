@@ -24,13 +24,14 @@ body {
   background: linear-gradient(to right, #0e0415, #730c1d);
   font-family: "Noto Serif JP";
   color: white;
-}
-.hidden {
-  opacity: 0;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
 #homeContainer {
   width: 100%;
-  height: 100%;
+  height: 50%;
+  opacity: 1;
   transition-property: opacity;
   transition-duration: 3s;
   transition-delay: 8s;
@@ -38,7 +39,7 @@ body {
 #homeContainer #homeTitle {
   font-size: 5em;
   text-align: center;
-  margin: 15% auto 2% auto;
+  margin: 0 auto 2% auto;
   transition-property: opacity;
   transition-duration: 4s;
 }
@@ -61,39 +62,47 @@ body {
   transition-delay: 4s;
 }
 #poemContainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0;
   transition-property: opacity;
   transition-duration: 3s;
   transition-delay: 10s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
-#poemContainer .abs {
-  position: absolute;
+#poemContainer #offset {
+  align-self: center;
 }
-#poemContainer #next {
-  opacity: 0;
+#poemContainer #poem {
+  align-self: center;
 }
 #poemContainer #back {
-  color: white;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  width: 60px;
   font-size: 2em;
-  display: none;
+  cursor: pointer;
+  color: #c5d644;
+  align-self: center;
 }
 #poemContainer .hide {
   opacity: 0;
   transform: scale(30);
-  transition: opacity 1.6s, transform 1.6s;
+  transition: opacity 16s, transform 16s;
 }
 #poemContainer .show {
   opacity: 1 !important;
-  transition: opacity 1.6s;
+  transition: opacity 16s;
 }
 #poemContainer .link {
   color: #c5d644;
   font-style: italic;
   cursor: pointer;
+}
+.hidden {
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

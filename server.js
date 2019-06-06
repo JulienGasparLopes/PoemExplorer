@@ -1,7 +1,7 @@
 var express = require('express'); //import de la bibliothèque Express
 var app = express(); //instanciation d'une application Express
 
-var PORT = 80;
+var PORT = 22233;
 
 //Redirection vers l'index
 app.get('/', function(req, res) {

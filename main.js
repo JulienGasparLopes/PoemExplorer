@@ -43,45 +43,8 @@ var bdd =
 			Il se rit de mes peurs et de mes maladresses<br>\
 			Il est mon curateur et la voix qui m'oppresse."
 	}
-];
-	
-//Auto set texts on center of the screen
-function resize() {
-	poem.style.left = Math.floor(window.innerWidth/2 - poem.offsetWidth/2) + "px";
-	poem.style.top = Math.floor(window.innerHeight/2 - poem.offsetHeight/2) + "px";
-	next.style.left = Math.floor(window.innerWidth/2 - next.offsetWidth/2) + "px";
-	next.style.top = Math.floor(window.innerHeight/2 - next.offsetHeight/2) + "px";
-	back.style.left = Math.floor(window.innerWidth/2 - back.offsetWidth/2) + "px";
-	back.style.transform = "translateY(" + window.innerHeight*3/4 + "px)";
-}
+];	
 
-function goToPoem(word, backward=false){
-	if(POEM_TO_SET_AFTER_TRANSITION == ""){
-		back.style.display = "none";
-		
-		//Set new text
-		var text = document.createElement("h2");
-		var newPoem = getPoemFromWord(word);
-		bdd.forEach(elem => {
-			if(elem.word.toUpperCase() != word.toUpperCase()){
-				newPoem = replaceWordByLink(newPoem, elem.word);
-			}
-		});
-		text.innerHTML = newPoem;
-		next.appendChild(text);
-		
-		resize();
-		
-		poem.classList.add("hide");
-		next.classList.add("show");
-		
-		POEM_TO_SET_AFTER_TRANSITION = word;
-		
-		if(!backward){
-			POEM_HISTORY.push(CURRENT_POEM);
-		}
-	}
-}
 
 //Get text of a word in db (WARNING : can return null)
 function getPoemFromWord(word){
@@ -97,12 +60,12 @@ function getPoemFromWord(word){
 //Replace a word by a link to the goToPoem function
 function replaceWordByLink(text, word){
 	var reg = new RegExp(word, 'gi');
-	var link = "<span class='link' onclick=goToPoem('" + word + "')>" + word + "</span>";
+	var link = "<span class='link' onclick=setPoem('" + word + "')>" + word + "</span>";
 	
 	return text.replace(reg, link);
 }
 
-function setPoem(word){
+function setPoem(word, backward=false){
 	//init poem div
 	poem.innerHTML = "";
 	poem.classList.remove("hide");
@@ -121,45 +84,33 @@ function setPoem(word){
 	var text = document.createElement("h2");
 	text.innerHTML = poemText;
 	poem.appendChild(text);
-	
+			
 	//Show back button
-	console.log(POEM_HISTORY)
+	if(!backward && CURRENT_POEM.length > 0){
+		POEM_HISTORY.push(CURRENT_POEM);
+	}
+	
 	if(POEM_HISTORY.length > 0){
-		back.style.display = "block";
+		back.style.opacity = 1;
 	}
 	else{
-		back.style.display = "none";
+		back.style.opacity = 0;
 	}
 	back.onclick = (e) => {
 		if(POEM_TO_SET_AFTER_TRANSITION == ""){
 			let poem = POEM_HISTORY.pop();
-			goToPoem(poem, true);
+			setPoem(poem, true);
 		}
 	}
 	
 	CURRENT_POEM = word;
 }
 
-
-//Function called when transition is done to set 
-//the next poem as the current poem
-function onTransitionEnd(){
-	setPoem(POEM_TO_SET_AFTER_TRANSITION);
-	next.innerHTML = "";
-	next.classList.remove("show");
-	poem.classList.remove("hide");
-	
-	resize();
-	
-	POEM_TO_SET_AFTER_TRANSITION = "";
-}
-
 window.onload = () => {
 		/** ----- GLOBAL VARIABLES ----- **/
 	var poem = document.getElementById("poem");
-	var next = document.getElementById("next");
 	var back = document.getElementById("back");
-
+	
 	let homeContainer = document.getElementById("homeContainer");
 	let poemContainer = document.getElementById("poemContainer");
 	let homeTitle = document.getElementById("homeTitle");
@@ -175,9 +126,5 @@ window.onload = () => {
 	poemContainer.style.opacity = 1;
 	homeContainer.style.opacity = 0;
 		
-	window.onresize = () => resize();
-	next.addEventListener("transitionend", onTransitionEnd);
-
 	setPoem("start");
-	resize();
 }
