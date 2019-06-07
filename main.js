@@ -60,10 +60,18 @@ function getPoemFromWord(word){
 
 //Replace a word by a link to the goToPoem function
 function replaceWordByLink(text, word){
-	var reg = new RegExp(word, 'gi');
-	var link = "<span class='link' onclick=switchPoem('" + word + "')>" + word + "</span>";
+	let regOcc = new RegExp(word, "gi");
+	let occurences = text.match(regOcc);
 	
-	return text.replace(reg, link);
+	if(occurences != null){
+		for(let occ of occurences){
+			let link = "<span class='link' onclick=switchPoem('" + occ + "')>" + occ + "</span>";
+			console.log(link);
+			text = text.replace(occ, link);
+		}
+	}
+	
+	return text;
 }
 
 function setPoem(word, backward=false){

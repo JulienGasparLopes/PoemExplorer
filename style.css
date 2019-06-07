@@ -80,6 +80,11 @@ body {
   top: 10px;
   left: 10px;
 }
+#poemContainer #instaAccount {
+  position: absolute;
+  top: 9px;
+  left: 60px;
+}
 #poemContainer #offset {
   align-self: center;
 }
