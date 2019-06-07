@@ -1,6 +1,7 @@
 var POEM_TO_SET_AFTER_TRANSITION = "";
 var CURRENT_POEM = "";
 var POEM_HISTORY = [];
+var ON_TRANS = false;
 
 var bdd =
 [
@@ -60,7 +61,7 @@ function getPoemFromWord(word){
 //Replace a word by a link to the goToPoem function
 function replaceWordByLink(text, word){
 	var reg = new RegExp(word, 'gi');
-	var link = "<span class='link' onclick=setPoem('" + word + "')>" + word + "</span>";
+	var link = "<span class='link' onclick=switchPoem('" + word + "')>" + word + "</span>";
 	
 	return text.replace(reg, link);
 }
@@ -68,7 +69,6 @@ function replaceWordByLink(text, word){
 function setPoem(word, backward=false){
 	//init poem div
 	poem.innerHTML = "";
-	poem.classList.remove("hide");
 	
 	//Get poem text
 	var poemText = getPoemFromWord(word);
@@ -82,8 +82,18 @@ function setPoem(word, backward=false){
 	
 	//Set new text
 	var text = document.createElement("h2");
+	var textFake = document.createElement("h2");
+	
+	text.id = "text";
+	textFake.id = "textFake";
+	
+	text.classList.add("hidden");
+	
 	text.innerHTML = poemText;
+	textFake.innerHTML = poemText;
+	
 	poem.appendChild(text);
+	poem.appendChild(textFake);
 			
 	//Show back button
 	if(!backward && CURRENT_POEM.length > 0){
@@ -97,13 +107,42 @@ function setPoem(word, backward=false){
 		back.style.opacity = 0;
 	}
 	back.onclick = (e) => {
-		if(POEM_TO_SET_AFTER_TRANSITION == ""){
+		if(!ON_TRANS && POEM_HISTORY.length > 0){
 			let poem = POEM_HISTORY.pop();
-			setPoem(poem, true);
+			switchPoem(poem, true);
 		}
 	}
 	
 	CURRENT_POEM = word;
+}
+
+function switchPoem(word, backward=false){
+	if(!ON_TRANS){
+		ON_TRANS = true;
+				
+		let textFake = document.getElementById("textFake");
+		let text = document.getElementById("text");
+		
+		textFake.classList.add("hide");
+		
+		//Get poem text
+		var poemText = getPoemFromWord(word);
+		
+		//Replace all words
+		bdd.forEach(elem => {
+			if(elem.word.toUpperCase() != word.toUpperCase()){
+				poemText = replaceWordByLink(poemText, elem.word);
+			}
+		});
+		
+		text.innerHTML = poemText;
+		text.classList.add("show");
+		
+		text.addEventListener("transitionend", () => {
+			ON_TRANS = false;
+			setPoem(word, backward);
+		});
+	}
 }
 
 window.onload = () => {
@@ -126,5 +165,13 @@ window.onload = () => {
 	poemContainer.style.opacity = 1;
 	homeContainer.style.opacity = 0;
 		
+	back.addEventListener("transitionend", () => {
+		if(back.style.opacity == 0)
+			back.style.cursor = "default";
+		else
+			back.style.cursor = "pointer";
+			
+	});
+	
 	setPoem("start");
 }

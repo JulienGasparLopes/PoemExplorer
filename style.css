@@ -75,26 +75,54 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
 }
+#poemContainer #githubRepo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
 #poemContainer #offset {
   align-self: center;
 }
 #poemContainer #poem {
   align-self: center;
+  position: relative;
+  width: 0;
+  height: 100px;
+}
+#poemContainer #text {
+  white-space: nowrap;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#poemContainer #textFake {
+  white-space: nowrap;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #poemContainer #back {
-  font-size: 2em;
-  cursor: pointer;
+  font-size: 3em;
   color: #c5d644;
   align-self: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
+#poemContainer .hidden {
+  opacity: 0;
 }
 #poemContainer .hide {
   opacity: 0;
-  transform: scale(30);
-  transition: opacity 16s, transform 16s;
+  transform: translateX(-50%) !important;
+  transition: opacity 1s;
 }
 #poemContainer .show {
   opacity: 1 !important;
-  transition: opacity 16s;
+  transition: opacity 1s 0.5s;
 }
 #poemContainer .link {
   color: #c5d644;
