@@ -1,0 +1,16 @@
+{
+  "name": "poem-explorer",
+  "version": "1.0.0",
+  "description": "This website allows user to navigate amoung poems. Each poem has a single-word title. When a poem contains a word that is also the title of an other poem, user can  click on this word to navigate to the next poem (hide the previous one and show the new poem)",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
